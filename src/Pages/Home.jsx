@@ -1,6 +1,6 @@
 import Carde from "../Components/card";
 import myImage from "../assets/icon.png";
-import "../css/Home.css";
+import "../css/home.css";
 import Search from "../Components/search";
 import { useContext } from "react";
 import { MovieContext } from "../context/MovieContext";
