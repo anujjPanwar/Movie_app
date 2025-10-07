@@ -5,15 +5,17 @@ import { MovieContext, MovieProvider } from "../context/MovieContext";
 function card({movies}) {
   const {favorites,setFavorites} = useContext(MovieContext)
 
-  const addFav = (imdbID) => {
+  const addFav = (vall) => {
     let updatedFavs = [...favorites];
+    
+    
 
-    if (favorites.includes(imdbID)) {
+    if (favorites.includes(vall)) {
       // If already in favorites, remove it
-      updatedFavs = updatedFavs.filter((id) => id !== imdbID);
+      updatedFavs = updatedFavs.filter((id) => id.imdbID !== vall.imdbID);
     } else {
       // Add to favorites
-      updatedFavs.push(imdbID);
+      updatedFavs.push(vall);
     }
 
     // Update localStorage and state
@@ -26,12 +28,13 @@ function card({movies}) {
         <h4>not found</h4>
       ) : (
         movies.map((val, index) => {
-          const isFav = favorites.includes(val.imdbID);
+          // const isFav = favorites.includes(val); // start edit
+          const isFav = [...favorites].some((x)=>x.imdbID == val.imdbID)
           return (
             <div className="card" key={index}>
               {/* <p style={Display='Block'}>{val.imdbID}</p> */}
               <img
-                onClick={() => addFav(val.imdbID)}
+                onClick={() => addFav(val)}
                 className="fanvorite-ico"
                 src={myImage}
                 alt="favourite"
